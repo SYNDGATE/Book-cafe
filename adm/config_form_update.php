@@ -51,6 +51,16 @@ if (isset($_POST['cf_intercept_ip']) && $_POST['cf_intercept_ip']) {
     }
 }
 
+if (! empty($_POST['logo_img_del']))  @unlink(G5_DATA_PATH."/common/logo_img.jpg");
+if (! empty($_POST['logo_img_del2']))  @unlink(G5_DATA_PATH."/common/logo_img2.jpg");
+if (! empty($_POST['mobile_logo_img_del']))  @unlink(G5_DATA_PATH."/common/mobile_logo_img.jpg");
+if (! empty($_POST['mobile_logo_img_del2']))  @unlink(G5_DATA_PATH."/common/mobile_logo_img2.jpg");
+
+if ($_FILES['logo_img']['name']) upload_file($_FILES['logo_img']['tmp_name'], "logo_img.jpg", G5_DATA_PATH."/common");
+if ($_FILES['logo_img2']['name']) upload_file($_FILES['logo_img2']['tmp_name'], "logo_img2.jpg", G5_DATA_PATH."/common");
+if ($_FILES['mobile_logo_img']['name']) upload_file($_FILES['mobile_logo_img']['tmp_name'], "mobile_logo_img.jpg", G5_DATA_PATH."/common");
+if ($_FILES['mobile_logo_img2']['name']) upload_file($_FILES['mobile_logo_img2']['tmp_name'], "mobile_logo_img2.jpg", G5_DATA_PATH."/common");
+
 $check_keys = array(
     'cf_use_email_certify' => 'int',
     'cf_use_homepage' => 'int',

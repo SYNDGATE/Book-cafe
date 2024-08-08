@@ -426,6 +426,7 @@ require_once './admin.head.php';
 
 $pg_anchor = '<ul class="anchor">
     <li><a href="#anc_cf_basic">기본환경</a></li>
+    <li><a href="#anc_cf_logo">로고설정</a></li>
     <li><a href="#anc_cf_board">게시판기본</a></li>
     <li><a href="#anc_cf_join">회원가입</a></li>
     <li><a href="#anc_cf_cert">본인확인</a></li>
@@ -454,7 +455,7 @@ if ($config['cf_sms_use'] && $config['cf_icode_id'] && $config['cf_icode_pw']) {
 }
 ?>
 
-<form name="fconfigform" id="fconfigform" method="post" onsubmit="return fconfigform_submit(this);">
+<form name="fconfigform" id="fconfigform" method="post" onsubmit="return fconfigform_submit(this);" enctype="MULTIPART/FORM-DATA">
     <input type="hidden" name="token" value="" id="token">
 
     <section id="anc_cf_basic">
@@ -819,6 +820,154 @@ if ($config['cf_sms_use'] && $config['cf_icode_id'] && $config['cf_icode_pw']) {
         </div>
     </section>
 
+   <section id="anc_cf_logo">
+        <h2 class="h2_frm">홈페이지 로고 설정</h2>
+        <?php echo $pg_anchor ?>
+
+	    <div class="tbl_frm01 tbl_wrap">
+             <table>
+                <caption>회원가입 설정</caption>
+                <colgroup>
+                    <col class="grid_4">
+                    <col>
+                    <col class="grid_4">
+                    <col>
+                </colgroup>
+                <tbody>
+                    <tr>
+		            <th scope="row">상단로고이미지</th>
+		            <td>
+	                <?php echo help("도서관 상단로고를 직접 올릴 수 있습니다. 이미지 파일만 가능합니다."); ?>
+		            <input type="file" name="logo_img" id="logo_img">
+			        <?php
+		                $logo_img = G5_DATA_PATH."/common/logo_img.jpg";
+		                if (file_exists($logo_img))
+		                {
+		                    $size = getimagesize($logo_img);
+		            ?>
+                <input type="checkbox" name="logo_img_del" value="1" id="logo_img_del">
+                <label for="logo_img_del"><span class="sound_only">상단로고이미지</span> 삭제</label>
+                <span class="scf_img_logoimg"></span>
+                <div id="logoimg" class="banner_or_img">
+                    <img src="<?php echo G5_DATA_URL; ?>/common/logo_img.jpg" alt="">
+                    <button type="button" class="sit_wimg_close">닫기</button>
+                </div>
+                <script>
+                $('<button type="button" id="cf_logoimg_view" class="btn_frmline scf_img_view">상단로고이미지 확인</button>').appendTo('.scf_img_logoimg');
+                </script>
+                <?php } ?>
+		         </td>
+		     </tr>
+		     <tr>
+		         <th scope="row">하단로고이미지</th>
+		         <td>
+		             <?php echo help("도서관 하단로고를 직접 올릴 수 있습니다. 이미지 파일만 가능합니다."); ?>
+		             <input type="file" name="logo_img2" id="logo_img2">
+		             <?php
+		             $logo_img2 = G5_DATA_PATH."/common/logo_img2.jpg";
+		             if (file_exists($logo_img2))
+		             {
+		                 $size = getimagesize($logo_img2);
+		             ?>
+		             <input type="checkbox" name="logo_img_del2" value="1" id="logo_img_del2">
+		             <label for="logo_img_del2"><span class="sound_only">하단로고이미지</span> 삭제</label>
+		             <span class="scf_img_logoimg2"></span>
+		             <div id="logoimg2" class="banner_or_img">
+		                 <img src="<?php echo G5_DATA_URL; ?>/common/logo_img2.jpg" alt="">
+		                 <button type="button" class="sit_wimg_close">닫기</button>
+		             </div>
+		             <script>
+		             $('<button type="button" id="cf_logoimg2_view" class="btn_frmline scf_img_view">하단로고이미지 확인</button>').appendTo('.scf_img_logoimg2');
+		             </script>
+		             <?php } ?>
+		         </td>
+				 </tr>
+				 <tr>
+				     <th scope="row">모바일 상단로고이미지</th>
+				     <td>
+				         <?php echo help("모바일 도서관 상단로고를 직접 올릴 수 있습니다. 이미지 파일만 가능합니다."); ?>
+				         <input type="file" name="mobile_logo_img" id="mobile_logo_img">
+				         <?php
+				         $mobile_logo_img = G5_DATA_PATH."/common/mobile_logo_img.jpg";
+				         if (file_exists($mobile_logo_img))
+				         {
+				             $size = getimagesize($mobile_logo_img);
+				         ?>
+				         <input type="checkbox" name="mobile_logo_img_del" value="1" id="mobile_logo_img_del">
+				         <label for="mobile_logo_img_del"><span class="sound_only">모바일 상단로고이미지</span> 삭제</label>
+				         <span class="scf_img_mobilelogoimg"></span>
+				         <div id="mobilelogoimg" class="banner_or_img">
+				             <img src="<?php echo G5_DATA_URL; ?>/common/mobile_logo_img.jpg" alt="">
+				             <button type="button" class="sit_wimg_close">닫기</button>
+				         </div>
+				         <script>
+				         $('<button type="button" id="cf_mobilelogoimg_view" class="btn_frmline scf_img_view">모바일 상단로고이미지 확인  </bu		 	ton>').appendTo('.scf_img_mobilelogoimg');
+				         </script>
+				         <?php } ?>
+				     </td>
+				 </tr>
+				 <tr>
+				     <th scope="row">모바일 하단로고이미지</th>
+				     <td>
+				         <?php echo help("모바일 도서관 하단로고를 직접 올릴 수 있습니다. 이미지 파일만 가능합니다."); ?>
+				         <input type="file" name="mobile_logo_img2" id="mobile_logo_img2">
+				         <?php
+				         $mobile_logo_img2 = G5_DATA_PATH."/common/mobile_logo_img2.jpg";
+				         if (file_exists($mobile_logo_img2))
+				         {
+				             $size = getimagesize($mobile_logo_img2);
+				         ?>
+				         <input type="checkbox" name="mobile_logo_img_del2" value="1" id="mobile_logo_img_del2">
+				         <label for="mobile_logo_img_del2"><span class="sound_only">모바일 하단로고이미지</span> 삭제</label>
+				         <span class="scf_img_mobilelogoimg2"></span>
+				         <div id="mobilelogoimg2" class="banner_or_img">
+				             <img src="<?php echo G5_DATA_URL; ?>/common/mobile_logo_img2.jpg" alt="">
+				             <button type="button" class="sit_wimg_close">닫기</button>
+				         </div>
+				         <script>
+				         $('<button type="button" id="cf_mobilelogoimg2_view" class="btn_frmline scf_img_view">모바일 하단로고이미지 확인  </bu			ton>').appendTo('.scf_img_mobilelogoimg2');
+				        </script>
+				         <?php } ?>
+				     </td>
+				 </tr>
+						</tbody>
+					</table>
+		         <?php if (file_exists($logo_img) || file_exists($logo_img2) || file_exists($mobile_logo_img) || file_exists($mobile_logo_img2)) { ?>
+		         <script>
+		         $(".banner_or_img").addClass("scf_img");
+		         $(function() {
+		             $(".scf_img_view").bind("click", function() {
+		                 var sit_wimg_id = $(this).attr("id").split("_");
+		                 var $img_display = $("#"+sit_wimg_id[1]);
+		                 $img_display.toggle();
+		                 if($img_display.is(":visible")) {
+		                     $(this).text($(this).text().replace("확인", "닫기"));
+		                 } else {
+		                     $(this).text($(this).text().replace("닫기", "확인"));
+		                 }
+		                 if(sit_wimg_id[1].search("mainimg") > -1) {
+		                     var $img = $("#"+sit_wimg_id[1]).children("img");
+		                     var width = $img.width();
+		                     var height = $img.height();
+		                     if(width > 700) {
+		                         var img_width = 700;
+		                         var img_height = Math.round((img_width * height) / width);
+		                         $img.width(img_width).height(img_height);
+		                     }
+		                 }
+		             });
+		             $(".sit_wimg_close").bind("click", function() {
+		                 var $img_display = $(this).parents(".banner_or_img");
+		                 var id = $img_display.attr("id");
+		                 $img_display.toggle();
+		                 var $button = $("#cf_"+id+"_view");
+		                 $button.text($button.text().replace("닫기", "확인"));
+		             });
+		         });
+		         </script>
+		         <?php } ?>
+        </div>
+    </section>
     <section id="anc_cf_join">
         <h2 class="h2_frm">회원가입 설정</h2>
         <?php echo $pg_anchor ?>

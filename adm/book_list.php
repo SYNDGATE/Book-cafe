@@ -28,7 +28,6 @@ if (!sql_query("select count(*) as cnt from g5_book_table",false)) { // attendan
         )";
     sql_query($sql_table, false);
 
-
 	sql_query( "ALTER TABLE `g5_book_table` CHANGE mb_id mb_id int(11) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL DEFAULT '0'; ");
 	sql_query( "ALTER TABLE `g5_book_table` CHANGE book_subject book_subject VARCHAR(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL DEFAULT ''; ");
 	sql_query( "ALTER TABLE `g5_book_table` CHANGE book_day book_day VARCHAR(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL DEFAULT ''; ");	

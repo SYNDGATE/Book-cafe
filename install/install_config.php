@@ -78,12 +78,6 @@ $ajax_token = md5($tmp_str.$_SERVER['REMOTE_ADDR'].dirname(dirname(__FILE__).'/'
             <input name="g5_install" type="checkbox" value="1" id="g5_install">재설치
         </td>
     </tr>
-    <tr>
-        <th scope="row"><label for="">쇼핑몰설치</label></th>
-        <td>
-            <input name="g5_shop_install" type="checkbox" value="1" id="g5_shop_install" checked="checked">설치
-        </td>
-    </tr>
     </tbody>
     </table>
 

@@ -52,7 +52,15 @@ include_once(G5_LIB_PATH . '/popular.lib.php');
   <div class="container mx-auto text-black">
     <div x-data="{ open: false }" class="flex flex-col mx-auto lg:items-center justify-between lg:flex-row">
       <div class="p-4 flex flex-row items-center justify-between">
-        <a href="<?php echo G5_URL ?>" class="text-lg font-semibold tracking-widest text-indigo-900 uppercase rounded-lg dark-mode:text-white focus:outline-none focus:shadow-outline"><img src="<?php echo G5_DATA_URL; ?>/common/logo_img.jpg" alt="<?php echo $config['cf_title']; ?>"></a>
+        <a href="<?php echo G5_URL ?>" class="text-lg font-semibold tracking-widest text-indigo-900 uppercase rounded-lg dark-mode:text-white focus:outline-none focus:shadow-outline">
+			<?php
+	    $logo_img = G5_DATA_PATH."/common/logo_img.jpg";
+		if (file_exists($logo_img))
+		 { ?>
+		 	<img src="<?php echo G5_DATA_URL; ?>/common/logo_img.jpg" alt="<?php echo $config['cf_title']; ?>"></a>
+		<?php }  else {
+			echo $config['cf_title'];
+		}?>
       </div>
 
       <nav :class="{'flex': open, 'hidden': !open}" class="w-full flex-col flex-grow pb-4 lg:pb-0 hidden lg:flex lg:justify-center lg:flex-row z-50">

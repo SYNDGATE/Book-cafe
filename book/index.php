@@ -29,8 +29,6 @@ if ($stx) {
 
 }
 
-
-
 if (!$sst) {
     $sst  = "id";
     $sod = "desc";
@@ -57,7 +55,12 @@ $colspan = 6;
 ?>
 <link rel="stylesheet" href="<?php echo G5_URL;?>/book/book.css?ver=210618">
 <div class="logobook">
-	<a href="../"><img src="<?php echo G5_DATA_URL; ?>/common/logo_img.jpg" alt="로고"></a>
+	<?php
+	    $logo_img = G5_DATA_PATH."/common/logo_img.jpg";
+		if (file_exists($logo_img))
+		 { ?>
+		 <a href="../"><img src="<?php echo G5_DATA_URL; ?>/common/logo_img.jpg" alt="로고"></a>
+		<?php } ?>
 </div>
 
 

@@ -270,6 +270,16 @@ if (!isset($config['cf_sms_type'])) {
     );
 }
 
+// BOOK 주소 필드 추가
+if (!isset($config['cf_addre'])) {
+    sql_query(
+        " ALTER TABLE `{$g5['config_table']}`
+                    ADD `cf_addre` varchar(10) NOT NULL DEFAULT ''",
+        true
+    );
+}
+if(!$config['cf_addre'])   $config['cf_addre'] = "경기도 광명시";
+
 // 접속자 정보 필드 추가
 if (!sql_query(" select vi_browser from {$g5['visit_table']} limit 1 ")) {
     sql_query(
@@ -495,6 +505,12 @@ if ($config['cf_sms_use'] && $config['cf_icode_id'] && $config['cf_icode_pw']) {
                         <td colspan="3">
                             <?php echo help('관리자가 보내고 받는 용도로 사용하는 메일의 발송이름을 입력합니다. (회원가입, 인증메일, 테스트, 회원메일발송 등에서 사용)') ?>
                             <input type="text" name="cf_admin_email_name" value="<?php echo get_sanitize_input($config['cf_admin_email_name']); ?>" id="cf_admin_email_name" required class="required frm_input" size="40">
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope="row"><label for="cf_addre">북카페 주소<strong class="sound_only">필수</strong></label></th>
+                        <td colspan="3">
+                            <input type="text" name="cf_addre" value="<?php echo get_sanitize_input($config['cf_addre']); ?>" class="required frm_input" size="40">
                         </td>
                     </tr>
                     <tr>

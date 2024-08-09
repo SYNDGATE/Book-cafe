@@ -164,7 +164,8 @@ $check_keys = array(
     'cf_icode_server_ip' => 'char',
     'cf_captcha' => 'char',
     'cf_syndi_token' => '',
-    'cf_syndi_except' => ''
+    'cf_syndi_except' => '',
+    'cf_addre' => 'char',
 );
 
 for ($i = 1; $i <= 10; $i++) {
@@ -346,7 +347,8 @@ $sql = " update {$g5['config_table']}
                 cf_7 = '{$_POST['cf_7']}',
                 cf_8 = '{$_POST['cf_8']}',
                 cf_9 = '{$_POST['cf_9']}',
-                cf_10 = '{$_POST['cf_10']}' ";
+                cf_10 = '{$_POST['cf_10']}',
+				cf_addre = '{$_POST['cf_addre']}' ";
 sql_query($sql);
 
 //sql_query(" OPTIMIZE TABLE `$g5[config_table]` ");

@@ -25,8 +25,15 @@ if (G5_IS_MOBILE) {
   <div class="xl:px-40 pb-12 lg:px-20 md:px-10 sm:px-5 px-10">
     <div class="w-full pt-12 flex flex-col sm:flex-row space-y-2  justify-start">
       <div class="w-full sm:w-2/5 pr-6 flex flex-col space-y-4">
-        <img src="<?php echo G5_THEME_IMG_URL ?>/ft_logo.png" class="w-1/3">
-        <p class="opacity-60">경기도 군포시 산본천로 101</p>
+	  <?php
+	    $logo_img = G5_DATA_PATH."/common/logo_img2.jpg";
+		if (file_exists($logo_img))
+		 { ?>
+		 	<img src="<?php echo G5_DATA_URL; ?>/common/logo_img2.jpg" alt="<?php echo $config['cf_title']; ?>" class="w-1/3"></a>
+		<?php }  else {
+			echo $config['cf_title'];
+		}?>
+        <p class="opacity-60"><?php echo $config['cf_addre'];?></p>
       </div>
   
     <div class="opacity-60 pt-2">

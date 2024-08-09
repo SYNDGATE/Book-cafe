@@ -43,13 +43,13 @@ $ajax_token = md5($tmp_str.$_SERVER['REMOTE_ADDR'].dirname(dirname(__FILE__).'/'
     <tr>
         <th scope="row"><label for="mysql_user">User</label></th>
         <td>
-            <input name="mysql_user" type="text" id="mysql_user">
+            <input name="mysql_user" type="text" id="mysql_user" value="root">
         </td>
     </tr>
     <tr>
         <th scope="row"><label for="mysql_pass">Password</label></th>
         <td>
-            <input name="mysql_pass" type="text" id="mysql_pass">
+            <input name="mysql_pass" type="text" id="mysql_pass" value="autoset">
         </td>
     </tr>
     <tr>
@@ -58,26 +58,8 @@ $ajax_token = md5($tmp_str.$_SERVER['REMOTE_ADDR'].dirname(dirname(__FILE__).'/'
             <input name="mysql_db" type="text" id="mysql_db">
         </td>
     </tr>
-    <tr>
-        <th scope="row"><label for="table_prefix">TABLE명 접두사</label></th>
-        <td>
-            <input name="table_prefix" type="text" value="g5_" id="table_prefix">
-            <span>TABLE명 접두사는 영문자, 숫자, _ 만 입력 가능합니다.</span>
-        </td>
-    </tr>
-    <tr>
-        <th scope="row"><label for="">쇼핑몰TABLE명 접두사</label></th>
-        <td>
-            <span>쇼핑몰TABLE명 접두사는 영문자, 숫자, _ 만 입력 가능합니다.</span>
-            <input name="g5_shop_prefix" type="text" value="g5_shop_" id="g5_shop_prefix">
-        </td>
-    </tr>
-    <tr>
-        <th scope="row"><label for=""><?php echo G5_VERSION; ?> 재설치</label></th>
-        <td>
-            <input name="g5_install" type="checkbox" value="1" id="g5_install">재설치
-        </td>
-    </tr>
+            <input name="table_prefix" type="hidden" value="g5_" id="table_prefix">
+            <input name="g5_shop_prefix" type="hidden" value="g5_shop_" id="g5_shop_prefix">
     </tbody>
     </table>
 

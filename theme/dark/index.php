@@ -15,7 +15,7 @@ include_once(G5_THEME_PATH . '/head.php');
     <h2 class="mt-2 mr-0 mb-10 ml-0 text-lg md:text-xl font-base mb-0 md:mb-4">도서관리는 검색 정보 제공 사이트입니다.</h2>
     <div class="inline-flex items-center">
       <a href="./book" target="_blank" class="uppercase text-base md:text-lg tracking-wide inline-block py-1.5 px-3 rounded-md transition transition-duration-500 bg-indigo-500 hover:bg-indigo-400">시작하기</a>
-      <a href="#" class="inline-flex items-center">
+      <a href="https://youtu.be/uQWPpCOAMDg" class="inline-flex items-center">
         <i class="bi bi-play-circle text-indigo-400 text-4xl transition transition-duration-300 leading-0 ml-8 hover:text-indigo-500"></i>
         <span class="text-base transition transition-duration-500 ml-2.5 text-gray-300 font-semibold hover:text-indigo-500">영상 보기</span>
       </a>

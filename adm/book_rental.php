@@ -31,25 +31,6 @@ if (!sql_query("select count(*) as cnt from g5_book_rental",false)) { // 회원�
       KEY id (book_mb_id,datetime)
         )";
     sql_query($sql_table, false);
-
-	sql_query( "ALTER TABLE `g5_book_rental` CHANGE book_mb_id book_mb_id VARCHAR(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL DEFAULT ''; ");
-	sql_query( "ALTER TABLE `g5_book_rental` CHANGE book_id book_id VARCHAR(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL DEFAULT ''; ");
-	sql_query( "ALTER TABLE `g5_book_rental` CHANGE book_name book_name VARCHAR(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL DEFAULT ''; ");	
-	sql_query( "ALTER TABLE `g5_book_rental` CHANGE book_hp book_hp VARCHAR(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL DEFAULT ''; ");
-	sql_query( "ALTER TABLE `g5_book_rental` CHANGE book_tel book_tel VARCHAR(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL DEFAULT ''; ");
-	sql_query( "ALTER TABLE `g5_book_rental` CHANGE addr addr VARCHAR(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL DEFAULT ''; ");
-	sql_query( "ALTER TABLE `g5_book_rental` CHANGE book_book_number book_book_number VARCHAR(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL  DEFAULT ''; ");
-	sql_query( "ALTER TABLE `g5_book_rental` CHANGE book_book_name book_book_name VARCHAR(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL  DEFAULT ''; ");
-	sql_query( "ALTER TABLE `g5_book_rental` CHANGE book_outbook book_outbook VARCHAR(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL  DEFAULT ''; ");
-	sql_query( "ALTER TABLE `g5_book_rental` CHANGE book_inbook book_inbook VARCHAR(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL  DEFAULT ''; ");
-	sql_query( "ALTER TABLE `g5_book_rental` CHANGE book_ing book_ing VARCHAR(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL  DEFAULT ''; ");
-	sql_query( "ALTER TABLE `g5_book_rental` CHANGE `book_memo` `book_memo` TEXT CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL; ");
-	sql_query( "ALTER TABLE `g5_book_rental` CHANGE `book_wr_1` `book_wr_1` VARCHAR(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL DEFAULT ''; ");
-	sql_query( "ALTER TABLE `g5_book_rental` CHANGE `book_wr_2` `book_wr_2` VARCHAR(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL DEFAULT ''; ");
-	sql_query( "ALTER TABLE `g5_book_rental` CHANGE `book_wr_3` `book_wr_3` VARCHAR(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL DEFAULT ''; ");
-	sql_query( "ALTER TABLE `g5_book_rental` CHANGE `book_wr_4` `book_wr_4` VARCHAR(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL DEFAULT ''; ");	
-	sql_query( "ALTER TABLE `g5_book_rental` CHANGE `book_wr_5` `book_wr_5` VARCHAR(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL DEFAULT ''; ");
-
 }
 
 
@@ -103,15 +84,52 @@ $to_date = isset($_REQUEST['to_date']) ? $_REQUEST['to_date'] : '';
 
 if (empty($fr_date) || ! preg_match("/^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$/", $fr_date) ) $fr_date = G5_TIME_YMD;
 if (empty($to_date) || ! preg_match("/^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$/", $to_date) ) $to_date = G5_TIME_YMD;
-
 include_once(G5_PLUGIN_PATH.'/jquery-ui/datepicker.php');
-
 ?>
 <script>
 $(function(){
     $("#fr_date, #to_date").datepicker({ changeMonth: true, changeYear: true, dateFormat: "yy-mm-dd", showButtonPanel: true, yearRange: "c-99:c+99", maxDate: "+30d" });
 });
 </script>
+  <style>
+    .popup {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 700px;
+            height: 520px;
+            background-color: white;
+            border: 1px solid black;
+            padding: 10px;
+            display: none;
+        }
+        /* CSS 코드 */
+        .frame {
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 비율에 맞게 설정 */
+            height: 0;
+        }
+
+        .frame > * {position: absolute;top: 0;left: 0;width: 100%;height: 100%;}
+
+        .frame > iframe {
+            border: none; /* 기본적으로 iframe에 적용되는 테두리 제거 */
+        }
+		
+		#overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Adjust the opacity (last value) as needed */
+    display: none; /* Initially hidden */
+	}
+	
+	.fullclose {margin: 40px 0 0 0;width:98%; height:30px;}
+    </style>
+	
 <section>
     <h2 class="h2_frm">도서 대여</h2>
 
@@ -136,7 +154,8 @@ $(function(){
         <tr>
             <th scope="row"><label for="book_mb_id">회원아이디<strong class="sound_only">필수</strong></label></th>
             <td><input type="text" name="book_mb_id" value="<?php echo $book_mb_id ?>" id="book_mb_id" class="required frm_input" required>
-			<button type="button" onclick="return add_menu();" class="btn btn_02">회원검색<span class="sound_only"> 새창</span></button>
+			<button class="btn btn_02" onclick="return openPopup()">회원검색</button>
+			
             <th scope="row"><label for="book_book_number">책번호/책이름<strong class="sound_only">필수</strong></label></th>
             <td><input type="text" name="book_book_number" value="<?php echo $book_book_number ?>" id="book_book_number" required class="required frm_input"> / <input type="text" name="book_book_name" id="book_book_name" value="<?php echo $book_book_name;?>" required class="frm_input"> <button type="button" onclick="return add_book_book_number();" class="btn btn_02">도서 검색<span class="sound_only"> 새창</span></button></td>
         </tr>
@@ -161,9 +180,15 @@ $(function(){
         </tbody>
         </table>
     </div>
-
+	<div id="overlay"></div>
+    <div id="popup" class="popup" onclick="closePopup()">
+        <h2>도서 회원 관리</h2>
+        <div class="frame" data-src="book_member_pop.php"></div>
+		<button onclick="closePopup()" class="btn btn_02 fullclose">닫기</button>		
+    </div>
     <div class="btn_confirm01 btn_confirm">
         <input type="submit" value="도서 대여 등록" class="btn_submit btn">
+		
     </div>
     </form>
 </section>
@@ -293,41 +318,50 @@ $(function(){
 <?php echo get_paging(G5_IS_MOBILE ? $config['cf_mobile_pages'] : $config['cf_write_pages'], $page, $total_page, $_SERVER['SCRIPT_NAME'].'?'.$qstr.'&amp;page='); ?>
 
 <script>
+		function add_book_book_number()
+		{
+			var names = document.fbooklist.book_book_number.value;
+		    var url = "./book_book_pop.php?stx="+names+"&sfl=mb_id";
+		    window.open(url, "new_member", "left=100,top=100,width=550,height=650,scrollbars=yes,resizable=yes");
+		    return false;
+		}
 
-function add_menu()
-{
-	var names = document.fbooklist.book_mb_id.value;
-    var url = "./book_member_pop.php?stx="+names+"&sfl=book_mb_id";
-    window.open(url, "new_member", "left=100,top=100,width=550,height=650,scrollbars=yes,resizable=yes");
-    return false;
-}
+		function fboardlist_submit(f)
+		{
+		    if (!is_checked("chk[]")) {
+		        alert(document.pressed+" 하실 항목을 하나 이상 선택하세요.");
+		        return false;
+		    }
 
-function add_book_book_number()
-{
-	var names = document.fbooklist.book_book_number.value;
-    var url = "./book_book_pop.php?stx="+names+"&sfl=mb_id";
-    window.open(url, "new_member", "left=100,top=100,width=550,height=650,scrollbars=yes,resizable=yes");
-    return false;
-}
+		    if(document.pressed == "선택삭제") {
+		        if(!confirm("선택한 자료를 정말 삭제하시겠습니까?")) {
+		            return false;
+		        }
+		    }
 
+		    return true;
+		}
 
-function fboardlist_submit(f)
-{
-    if (!is_checked("chk[]")) {
-        alert(document.pressed+" 하실 항목을 하나 이상 선택하세요.");
-        return false;
-    }
+		function openPopup() {
+				    document.getElementById('popup').style.display = 'block';
+				    document.getElementById('overlay').style.display = 'block';
+				    return false;
+				}
 
-    if(document.pressed == "선택삭제") {
-        if(!confirm("선택한 자료를 정말 삭제하시겠습니까?")) {
-            return false;
-        }
-    }
-
-    return true;
-}
-
-
+		function closePopup() {
+		  var popup = document.getElementById("popup");
+		  window.parent.document.getElementById('overlay').style.display = 'none';
+		  popup.style.display = "none";
+		}
+		        document.addEventListener("DOMContentLoaded", function () {
+            const frames = document.querySelectorAll(".frame");
+            frames.forEach((frame) => {
+                const src = frame.dataset.src;
+                const iframe = document.createElement("iframe");
+                iframe.src = src;
+                frame.appendChild(iframe);
+            });
+        });
 </script>
 
 <?php

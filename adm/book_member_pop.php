@@ -47,8 +47,6 @@ $g5['title'] = '도서 회원 관리';
 include_once(G5_PATH.'/head.sub.php');
 $colspan = 4;
 ?>
-
-
 <form name="fsearch" id="fsearch" class="local_sch01 local_sch" method="get">
 
 <label for="sfl" class="sound_only">검색대상</label>
@@ -62,8 +60,6 @@ $colspan = 4;
 <input type="text" name="stx" value="<?php echo $stx ?>" id="stx" required class="required frm_input">
 <input type="submit" value="검색" class="btn_submit">
 </form>
-
-
 <form name="fboardlist" id="fboardlist" onsubmit="return fboardlist_submit(this);" method="post">
 <input type="hidden" name="sst" value="<?php echo $sst ?>">
 <input type="hidden" name="sod" value="<?php echo $sod ?>">
@@ -105,7 +101,7 @@ $colspan = 4;
         </td>
         </td>
         <td class="td_mng td_mng_m">
-           <button type="button" class="add_select btn btn_03" onclick="item_target_id('<?php echo $row['book_mb_id'];?>','<?php echo $row['book_name'];?>','<?php echo $row['book_hp'];?>')">선택</button>
+           <button type="button" class="add_select btn btn_03" onclick="closePopup('<?php echo $row['book_mb_id'];?>','<?php echo $row['book_name'];?>','<?php echo $row['book_hp'];?>')">선택</button>
         </td>
     </tr>
     <?php
@@ -121,16 +117,13 @@ $colspan = 4;
 <?php echo get_paging(G5_IS_MOBILE ? $config['cf_mobile_pages'] : $config['cf_write_pages'], $page, $total_page, $_SERVER['SCRIPT_NAME'].'?'.$qstr.'&amp;page='); ?>
 
 <script>
-function item_target_id(book_mb_id,book_name,book_up)
-{
-    var f = window.opener.document.fbooklist;
-
-	  f['book_mb_id'].value = book_mb_id;
-	  f['book_name'].value = book_name;
-	  f['book_hp'].value = book_up;
-
-    window.close();
-}
+        function closePopup(book_mb_id,book_name,book_hp) {			
+            window.parent.document.querySelector('input[name="book_mb_id"]').value = book_mb_id;
+            window.parent.document.querySelector('input[name="book_name"]').value = book_name;
+            window.parent.document.querySelector('input[name="book_hp"]').value = book_hp;
+            window.parent.document.getElementById('popup').style.display = 'none';
+			window.parent.document.getElementById('overlay').style.display = 'none';
+        }
 </script>
 <?php
 include_once(G5_PATH.'/tail.sub.php');

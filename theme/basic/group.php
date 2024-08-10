@@ -13,8 +13,8 @@ $g5['title'] = $group['gr_subject'];
 include_once(G5_THEME_PATH . '/head.php');
 include_once(G5_LIB_PATH . '/latest.lib.php');
 ?>
-
-<div class="latest_wr">
+<section  class="relative w-full flex items-center">
+<div>
 
   <!-- 메인화면 최신글 시작 -->
   <?php
@@ -45,5 +45,6 @@ include_once(G5_LIB_PATH . '/latest.lib.php');
   ?>
   <!-- 메인화면 최신글 끝 -->
 </div>
+</section>
 <?php
 include_once(G5_THEME_PATH . '/tail.php');

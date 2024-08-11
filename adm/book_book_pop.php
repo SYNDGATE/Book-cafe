@@ -104,7 +104,7 @@ $colspan = 4;
         </td>
         </td>
         <td class="td_mng td_mng_m">
-           <button type="button" class="add_select btn btn_03" onclick="item_target_id('<?php echo $row['mb_id'];?>','<?php echo $row['book_subject'];?>')">선택</button>
+           <button type="button" class="add_select btn btn_03" onclick="closePopup('<?php echo $row['mb_id'];?>','<?php echo $row['book_subject'];?>')">선택</button>
         </td>
     </tr>
     <?php
@@ -120,15 +120,13 @@ $colspan = 4;
 <?php echo get_paging(G5_IS_MOBILE ? $config['cf_mobile_pages'] : $config['cf_write_pages'], $page, $total_page, $_SERVER['SCRIPT_NAME'].'?'.$qstr.'&amp;page='); ?>
 
 <script>
-function item_target_id(book_book_number,book_book_name)
-{
-    var f = window.opener.document.fbooklist;
-
-	  f['book_book_number'].value = book_book_number;
-	  f['book_book_name'].value = book_book_name;
-
-    window.close();
-}
+        function closePopup(book_book_number,book_book_name) {			
+            window.parent.document.querySelector('input[name="book_book_number"]').value = book_book_number;
+            window.parent.document.querySelector('input[name="book_book_name"]').value = book_book_name;
+            window.parent.document.getElementById('popup2').style.display = 'none';
+			window.parent.document.getElementById('overlay').style.display = 'none';
+			window.close();
+        }
 </script>
 <?php
 include_once(G5_PATH.'/tail.sub.php');

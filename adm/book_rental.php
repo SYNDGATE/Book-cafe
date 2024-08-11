@@ -157,7 +157,9 @@ $(function(){
 			<button class="btn btn_02" onclick="return openPopup()">회원검색</button>
 			
             <th scope="row"><label for="book_book_number">책번호/책이름<strong class="sound_only">필수</strong></label></th>
-            <td><input type="text" name="book_book_number" value="<?php echo $book_book_number ?>" id="book_book_number" required class="required frm_input"> / <input type="text" name="book_book_name" id="book_book_name" value="<?php echo $book_book_name;?>" required class="frm_input"> <button type="button" onclick="return add_book_book_number();" class="btn btn_02">도서 검색<span class="sound_only"> 새창</span></button></td>
+            <td><input type="text" name="book_book_number" value="<?php echo $book_book_number ?>" id="book_book_number" required class="required frm_input"> / <input type="text" name="book_book_name" id="book_book_name" value="<?php echo $book_book_name;?>" required class="frm_input"> 			
+			<button class="btn btn_02" onclick="return openPopup2()">도서 검색</button>
+			</td>
         </tr>
         <tr>
             <th scope="row"><label for="book_outbook">대여일<strong class="sound_only">필수</strong></label></th>
@@ -182,13 +184,19 @@ $(function(){
     </div>
 	<div id="overlay"></div>
     <div id="popup" class="popup" onclick="closePopup()">
-        <h2>도서 회원 관리</h2>
+        <h2>회원 관리</h2>
         <div class="frame" data-src="book_member_pop.php"></div>
 		<button onclick="closePopup()" class="btn btn_02 fullclose">닫기</button>		
     </div>
+
+    <div id="popup2" class="popup" onclick="closePopup2()">
+        <h2>도서 관리</h2>
+        <div class="frame" data-src="book_book_pop.php"></div>
+		<button onclick="closePopup2()" class="btn btn_02 fullclose">닫기</button>		
+    </div>
+	
     <div class="btn_confirm01 btn_confirm">
         <input type="submit" value="도서 대여 등록" class="btn_submit btn">
-		
     </div>
     </form>
 </section>
@@ -346,14 +354,27 @@ $(function(){
 				    document.getElementById('popup').style.display = 'block';
 				    document.getElementById('overlay').style.display = 'block';
 				    return false;
-				}
+		}
 
 		function closePopup() {
 		  var popup = document.getElementById("popup");
 		  window.parent.document.getElementById('overlay').style.display = 'none';
 		  popup.style.display = "none";
 		}
-		        document.addEventListener("DOMContentLoaded", function () {
+		
+		function openPopup2() {
+				    document.getElementById('popup2').style.display = 'block';
+				    document.getElementById('overlay').style.display = 'block';
+				    return false;
+		}
+
+		function closePopup2() {
+		  var popup2 = document.getElementById("popup2");
+		  window.parent.document.getElementById('overlay').style.display = 'none';
+		  popup2.style.display = "none";
+		}
+		
+        document.addEventListener("DOMContentLoaded", function () {
             const frames = document.querySelectorAll(".frame");
             frames.forEach((frame) => {
                 const src = frame.dataset.src;

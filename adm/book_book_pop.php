@@ -43,7 +43,7 @@ $result = sql_query($sql);
 
 $listall = '<a href="'.$_SERVER['SCRIPT_NAME'].'" class="ov_listall">전체목록</a>';
 
-$g5['title'] = '도서 회원 관리';
+$g5['title'] = '도서 관리';
 include_once(G5_PATH.'/head.sub.php');
 $colspan = 4;
 ?>

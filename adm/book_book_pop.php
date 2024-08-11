@@ -53,7 +53,6 @@ $colspan = 4;
 
 <label for="sfl" class="sound_only">검색대상</label>
 <select name="sfl" id="sfl">
-    <option value="mb_id"<?php echo get_selected($sfl, "mb_id", true); ?>>아이디</option>
     <option value="book_subject"<?php echo get_selected($sfl, "book_subject ", true); ?>>도서명</option>
     <option value="book_authors_name "<?php echo get_selected($sfl, "book_authors_name"); ?>>작가명</option>
     <option value="book_site "<?php echo get_selected($sfl, "book_site"); ?>>장소</option>

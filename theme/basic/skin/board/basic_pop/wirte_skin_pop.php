@@ -1,7 +1,9 @@
 <?php
+// 제작 : 카이루  - 2024.8.15
+// 팝업 관련 내용 광복절 버전
+
 include_once('../../../../../common.php');
 add_stylesheet('<link rel="stylesheet" href="' . $board_skin_url . '/style.css">', 0);
-
 if($w == "up" ) {
    $sql = " update {$write_table}
                 set  wr_subject = '{$wr_subject}',

@@ -1,0 +1,48 @@
+/* 팝업 CSS 코드 */
+.popup {position: fixed;top: 38%;left: 50%;transform: translate(-50%, -50%);width: 700px;height: 360px;background-color: white;border: 1px solid black;padding: 10px;display: none; box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); }
+.frame {position: relative;top:5px;padding-bottom: 41%;height: 0;}
+.frame > * {position: absolute;top: 0;left: 0;width: 100%;height: 100%;}
+.frame > iframe {border: 1px solid #ccc;} /*테두리제거*/
+
+/* 폼 테이블 */
+.grid_1 {width:20%;text-align:center;}
+.grid_2 {width:80%;}
+
+.tbl_frm01 th{border-top:1px solid #e6e6e6;border-bottom:1px solid #e6e6e6;background:#f6f6f6;padding: 10px;width:200px;text-align:center}
+.tbl_frm01 td{text-align:left;border-top:1px solid #e6e6e6;border-bottom:1px solid #e6e6e6;}
+.tbl_frm01 textarea {height:150px;}
+.h2_frm{text-align:center;color:#3f51b5;font-size:1.29em;font-weight:bold;margin:10px 0 10px}
+.pop_submit {height:45px;padding:0 20px;border-radius:3px;font-weight:bold;font-size:1.083em;text-align:center; margin-top:5px}
+.full_input {width:100%;vertical-align:top;height:30px;font-size;1.583em;}
+
+.custom-btn {
+  font-size:0.9em;
+  width: 100px;
+  height: 40px;
+  color: #fff;
+  border-radius: 5px;
+  padding: 10px 25px;
+  font-family: 'Lato', sans-serif;
+  font-weight: 500;
+  background: transparent;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  display: inline-block;
+   box-shadow:inset 2px 2px 2px 0px rgba(255,255,255,.5),
+   7px 7px 20px 0px rgba(0,0,0,.1),
+   4px 4px 5px 0px rgba(0,0,0,.1);
+  outline: none;
+}
+/* 1 */
+.btn-1 {background: rgb(6,14,131); background: linear-gradient(0deg, rgba(6,14,131,1) 0%, rgba(12,25,180,1) 100%); border: none;}
+.btn-1:hover {background: rgb(0,3,255);background: linear-gradient(0deg, rgba(0,3,255,1) 0%, rgba(2,126,251,1) 100%);}
+.btn-5 {background: rgb(255,27,0);  background: linear-gradient(0deg, rgba(255.27.0) 0%,  rgba(255,27,0,1) 100%);  border: none;}
+.btn-5:hover {background: rgb(0,3,255);   background: linear-gradient(0deg, rgba(251,75,1,1) 50%, rgba(251,75,2,1) 100%);}
+.thirteen h1 {position:relative; font-size:19px; font-weight:700; letter-spacing:0px; text-transform:uppercase; width:190px; text-align:center; margin:auto; white-space:nowrap;padding:5px 8px 3px 8px;}
+.thirteen h1:before, .thirteen h1:after {background-color: #c50000;position:absolute;content: '';height: 7px;width: 7px; border-radius:50%;bottom: 12px;}
+.thirteen h1:before {left:-20px;}
+.thirteen h1:after {right:-20px;}
+#bo_w #pop_select {height:30px;font-size:14px;}
+#bo_w .pop_input {border:2px solid #FEFEFE;}
+#overlay {position: fixed;top: 0;left: 0;width: 100%;height: 100%;background-color: rgba(0, 0, 0, 0.4);display: none;}

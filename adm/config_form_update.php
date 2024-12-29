@@ -6,6 +6,17 @@ check_demo();
 
 auth_check_menu($auth, $sub_menu, 'w');
 
+
+// 파일을 업로드 함
+function upload_file($srcfile, $destfile, $dir)
+{
+    if ($destfile == "") return false;
+    // 업로드 한후 , 퍼미션을 변경함
+    @move_uploaded_file($srcfile, $dir.'/'.$destfile);
+    @chmod($dir.'/'.$destfile, G5_FILE_PERMISSION);
+    return true;
+}
+
 if ($is_admin != 'super') {
     alert('최고관리자만 접근 가능합니다.');
 }

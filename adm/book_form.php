@@ -8,29 +8,28 @@ auth_check_menu($auth, $sub_menu, 'w');
 $html_title = '도서관리';
 
 if ($w == '') {
-	// 번호취득
-	$sql_3 = "select mb_id from g5_book_table order by mb_id desc";
-	$row_3 = sql_fetch_array(sql_query($sql_3));
+    // 번호취득
+    $sql_3 = "SELECT mb_id FROM g5_book_table ORDER BY mb_id DESC";
+    $row_3 = sql_fetch_array(sql_query($sql_3));
 
-	$co['mb_id'] = $row_3['mb_id'] + 1;
-	
-   // 취득번호가 존재한다면
-    $sqldd = " select mb_id from g5_book_table where mb_id = '{$co['mb_id']}' ";
+    $co['mb_id'] = $row_3['mb_id'] + 1;
+
+    // 취득번호가 존재한다면
+    $sqldd = "SELECT mb_id FROM g5_book_table WHERE mb_id = '{$co['mb_id']}'";
     $coss = sql_fetch($sqldd);
-    if($coss['mb_id']) 
-	  $co['mb_id'] = time();
-	
+    if ($coss['mb_id']) {
+        $co['mb_id'] = time();
+    }
 } else if ($w == 'u') {
-
     $html_title .= " 수정";
     $readonly = " readonly";
 
-    $sql = " select * from g5_book_table where id = '$id' ";
+    $sql = "SELECT * FROM g5_book_table WHERE id = '$id'";
     $co = sql_fetch($sql);
-    if (!$co['id'])
+    if (!$co['id']) {
         alert('등록된 자료가 없습니다.');
+    }
 }
-
 
 $g5['title'] = $html_title;
 include_once ('./admin.head.php');
@@ -39,8 +38,6 @@ $pg_anchor = '<ul class="anchor">
     <li><a href="#anc_bo_basic">기본 설정</a></li>
     <li><a href="#anc_bo_extra">메모필드</a></li>
 </ul>';
-
-
 ?>
 
 <form name="fboardform" id="fboardform" action="./book_form_update.php" onsubmit="return fboardform_submit(this)" method="post" enctype="multipart/form-data">
@@ -68,54 +65,54 @@ $pg_anchor = '<ul class="anchor">
         <tr>
             <th scope="row"><label for="mb_id ">분류번호<strong class="sound_only">필수</strong></label></th>
             <td colspan="2">
-                <input type="text" name="mb_id" value="<?php echo get_text($co['mb_id']);?>" required id="mb_id"  class="required frm_input" size="80" maxlength="120">
+                <input type="text" name="mb_id" value="<?php echo get_text($co['mb_id'] ?? '');?>" required id="mb_id"  class="required frm_input" size="80" maxlength="120">
             </td>
         </tr>
         <tr>
             <th scope="row"><label for="book_subject ">도서명<strong class="sound_only">필수</strong></label></th>
             <td colspan="2">
-                <input type="text" name="book_subject" value="<?php echo get_text($co['book_subject']) ?>" id="book_subject" required class="required frm_input" size="80" maxlength="120">
+                <input type="text" name="book_subject" value="<?php echo get_text($co['book_subject'] ?? '');?>" id="book_subject" required class="required frm_input" size="80" maxlength="120">
             </td>
         </tr>
         <tr>
             <th scope="row"><label for="book_day">구매일자<strong class="sound_only">필수</strong></label></th>
             <td colspan="2">
-                <input type="text" name="book_day" value="<?php echo get_text($co['book_day']) ?>" id="book_day" class=" frm_input" size="80" maxlength="120">
+                <input type="text" name="book_day" value="<?php echo get_text($co['book_day'] ?? '') ?>" id="book_day" class=" frm_input" size="80" maxlength="120">
             </td>
         </tr>
         <tr>
             <th scope="row"><label for="book_site ">장소<strong class="sound_only">필수</strong></label></th>
             <td colspan="2">
-                <input type="text" name="book_site" value="<?php echo get_text($co['book_site']) ?>" id="book_site" class=" frm_input" size="80" maxlength="120">
+                <input type="text" name="book_site" value="<?php echo get_text($co['book_site'] ?? '') ?>" id="book_site" class=" frm_input" size="80" maxlength="120">
             </td>
         </tr>
         <tr>
             <th scope="row"><label for="book_sponsor ">후원<strong class="sound_only">필수</strong></label></th>
             <td colspan="2">
-                <input type="text" name="book_sponsor" value="<?php echo get_text($co['book_sponsor']) ?>" id="book_sponsor "class="frm_input" size="80" maxlength="120">
+                <input type="text" name="book_sponsor" value="<?php echo get_text($co['book_sponsor'] ?? '') ?>" id="book_sponsor "class="frm_input" size="80" maxlength="120">
             </td>
         </tr>
         <tr>
             <th scope="row"><label for="book_cagegory ">분류코드<strong class="sound_only">필수</strong></label></th>
             <td colspan="2">
-                <input type="text" name="book_cagegory" value="<?php echo get_text($co['book_cagegory']) ?>" id="book_cagegory "class="frm_input" size="80" maxlength="120">
+                <input type="text" name="book_cagegory" value="<?php echo get_text($co['book_cagegory'] ?? '') ?>" id="book_cagegory "class="frm_input" size="80" maxlength="120">
             </td>
         </tr>
-		
+        
         <tr>
             <th scope="row"><label for="book_sortted ">도서분류<strong class="sound_only">필수</strong></label></th>
             <td colspan="2">
-                <input type="text" name="book_sortted" value="<?php echo get_text($co['book_sortted']) ?>" id="book_sortted " class="frm_input" size="80" maxlength="120">
+                <input type="text" name="book_sortted" value="<?php echo get_text($co['book_sortted'] ?? '') ?>" id="book_sortted " class="frm_input" size="80" maxlength="120">
             </td>
         </tr>
         <tr>
             <th scope="row"><label for="book_authors_name ">작가명<strong class="sound_only">필수</strong></label></th>
             <td colspan="2">
-                <input type="text" name="book_authors_name" value="<?php echo get_text($co['book_authors_name']) ?>" id="book_authors_name" class="frm_input" size="80" maxlength="120">
+                <input type="text" name="book_authors_name" value="<?php echo get_text($co['book_authors_name'] ?? '') ?>" id="book_authors_name" class="frm_input" size="80" maxlength="120">
             </td>
         </tr>
 
-		 </tbody>
+         </tbody>
         </table>
     </div>
 </section>
@@ -138,7 +135,7 @@ $pg_anchor = '<ul class="anchor">
         <tr>
             <th scope="row">메모필드<?php echo $i ?></th>
             <td class="td_extra">
-                 <input type="text" name="book_wr_<?php echo $i ?>" value="<?php echo get_text($co['book_wr_'.$i]) ?>" id="book_wr_<?php echo $i ?>" class="frm_input extra-value-input">
+                 <input type="text" name="book_wr_<?php echo $i ?>" value="<?php echo get_text($co['book_wr_'.$i] ?? '') ?>" id="book_wr_<?php echo $i ?>" class="frm_input extra-value-input">
             </td>
         </tr>
         <?php } ?>
@@ -194,3 +191,4 @@ function frmcontentform_check(f)
 
 <?php
 include_once ('./admin.tail.php');
+?>

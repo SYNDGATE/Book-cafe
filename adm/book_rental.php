@@ -74,6 +74,11 @@ $result = sql_query($sql);
 
 $listall = '<a href="'.$_SERVER['SCRIPT_NAME'].'" class="ov_listall">전체목록</a>';
 
+// 변수를 정의하고 초기화
+$book_mb_id = isset($co['book_mb_id']) ? $co['book_mb_id'] : '';
+$book_book_number = isset($co['book_book_number']) ? $co['book_book_number'] : '';
+$book_book_name = isset($co['book_book_name']) ? $co['book_book_name'] : '';
+
 $g5['title'] = '도서 대여 관리';
 include_once('./admin.head.php');
 
@@ -81,6 +86,7 @@ $colspan = 9;
 
 $fr_date = isset($_REQUEST['fr_date']) ? $_REQUEST['fr_date'] : '';
 $to_date = isset($_REQUEST['to_date']) ? $_REQUEST['to_date'] : '';
+
 
 if (empty($fr_date) || ! preg_match("/^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$/", $fr_date) ) $fr_date = G5_TIME_YMD;
 if (empty($to_date) || ! preg_match("/^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$/", $to_date) ) $to_date = G5_TIME_YMD;
@@ -153,7 +159,7 @@ $(function(){
         <tbody>
         <tr>
             <th scope="row"><label for="book_mb_id">회원아이디<strong class="sound_only">필수</strong></label></th>
-            <td><input type="text" name="book_mb_id" value="<?php echo $book_mb_id ?>" id="book_mb_id" class="required frm_input" required>
+            <td><input type="text" name="book_mb_id" value="<?php echo $book_mb_id;?>" id="book_mb_id" class="required frm_input" required>
 			<button class="btn btn_02" onclick="return openPopup()">회원검색</button>
 			
             <th scope="row"><label for="book_book_number">책번호/책이름<strong class="sound_only">필수</strong></label></th>

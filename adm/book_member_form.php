@@ -19,7 +19,7 @@ if ($w == '') {
     if (!$co['id'])
         alert('등록된 자료가 없습니다.');
 }
-
+//isset($co['book_mb_id']) ? get_text($co['book_mb_id']) : '';
 
 $g5['title'] = $html_title;
 include_once ('./admin.head.php');
@@ -67,50 +67,53 @@ $pg_anchor = '<ul class="anchor">
         <tr>
             <th scope="row"><label for="book_name">회원이름<strong class="sound_only">필수</strong></label></th>
             <td colspan="2">
-                <input type="text" name="book_name" value="<?php echo get_text($co['book_name']) ?>" id="book_name " required class="required frm_input" size="80" maxlength="120">
+                <input type="text" name="book_name" value="<?php 
+				if (isset($co) && array_key_exists('book_name', $co)) echo get_text($co['book_name']); else echo '';
+				?>" id="book_name " required class="required frm_input" size="80" maxlength="120">
             </td>
         </tr>
 
         <tr>
             <th scope="row"><label for="book_hp">회원HP<strong class="sound_only">필수</strong></label></th>
             <td colspan="2">
-                <input type="text" name="book_hp" value="<?php echo get_text($co['book_hp']) ?>" id="book_hp" required class="required frm_input" size="80" maxlength="120"> (ex: 010-1234-4567)
+                <input type="text" name="book_hp" value="<?php 
+				if (isset($co) && array_key_exists('book_hp', $co)) echo get_text($co['book_hp']); else echo '';?>" id="book_hp" required class="required frm_input" size="80" maxlength="120"> (ex: 010-1234-4567)
             </td>
         </tr>
 
         <tr>
             <th scope="row"><label for="book_tel">집전화</label></th>
             <td colspan="2">
-                <input type="text" name="book_tel" value="<?php echo get_text($co['book_tel']) ?>" id="book_tel  " class="frm_input" size="80" maxlength="120">
+                <input type="text" name="book_tel" value="<?php if (isset($co) && array_key_exists('book_tel', $co)) echo get_text($co['book_tel']); else echo ''; ?>" id="book_tel  " class="frm_input" size="80" maxlength="120">
             </td>
         </tr>
 
         <tr>
             <th scope="row"><label for="book_email">이메일</label></th>
             <td colspan="2">
-                <input type="text" name="book_email" value="<?php echo get_text($co['book_email']) ?>" id="id="mb_email"  " class="frm_input email" size="80" maxlength="120">
+                <input type="text" name="book_email" value="<?php if (isset($co) && array_key_exists('book_email', $co)) echo get_text($co['book_email']); else echo ''; ?>" id="mb_email" class="frm_input email" size="80" maxlength="120">
             </td>
         </tr>
     <tr>
         <th scope="row">주소</th>
         <td colspan="3" class="td_addr_line">
             <label for="mb_zip" class="sound_only">우편번호</label>
-            <input type="text" name="mb_zip" value="<?php echo $co['mb_zip']; ?>" id="mb_zip" class="frm_input readonly" size="5" maxlength="6">
+            <input type="text" name="mb_zip" value="<?php echo isset($co['mb_zip']) ? $co['mb_zip'] :'';?>" id="mb_zip" class="frm_input readonly" size="5" maxlength="6">
             <button type="button" class="btn_frmline" onclick="win_zip('fboardform', 'mb_zip', 'mb_addr1', 'mb_addr2', 'mb_addr3', 'mb_addr_jibeon');">주소 검색</button><br>
-            <input type="text" name="mb_addr1" value="<?php echo $co['mb_addr1'] ?>" id="mb_addr1" class="frm_input readonly" size="60">
+            <input type="text" name="mb_addr1" value="<?php echo isset($co['mb_addr1']) ? $co['mb_addr1'] :'';?>" id="mb_addr1" class="frm_input readonly" size="60">
             <label for="mb_addr1">기본주소</label><br>
-            <input type="text" name="mb_addr2" value="<?php echo $co['mb_addr2'] ?>" id="mb_addr2" class="frm_input" size="60">
+            <input type="text" name="mb_addr2" value="<?php echo isset($co['mb_addr2']) ? $co['mb_addr2'] :'';?>" id="mb_addr2" class="frm_input" size="60">
             <label for="mb_addr2">상세주소</label>
             <br>
-            <input type="text" name="mb_addr3" value="<?php echo $co['mb_addr3'] ?>" id="mb_addr3" class="frm_input" size="60">
+            <input type="text" name="mb_addr3" value="<?php echo isset($co['mb_addr3']) ? $co['mb_addr3'] :'';?>" id="mb_addr3" class="frm_input" size="60">
             <label for="mb_addr3">참고항목</label>
-            <input type="hidden" name="mb_addr_jibeon" value="<?php echo $co['mb_addr_jibeon']; ?>"><br>
+            <input type="hidden" name="mb_addr_jibeon" value="<?php echo isset($co['mb_addr_jibeon']) ? $co['mb_addr_jibeon'] :'';?>"><br>
         </td>
     </tr>
         <tr>
             <th scope="row"><label for="book_memo">메모</label></th>
             <td colspan="2">
-			<textarea name="book_memo" id="book_memo"><?php echo $co['book_memo'] ?></textarea>
+			<textarea name="book_memo" id="book_memo"><?php echo isset($co['book_memo']) ? $co['book_memo'] :'';?></textarea>
             </td>
         </tr>
 		 </tbody>
@@ -136,7 +139,7 @@ $pg_anchor = '<ul class="anchor">
         <tr>
             <th scope="row">메모필드<?php echo $i ?></th>
             <td class="td_extra">
-                 <input type="text" name="book_wr_<?php echo $i ?>" value="<?php echo get_text($co['book_wr_'.$i]) ?>" id="book_wr_<?php echo $i ?>" class="frm_input extra-value-input">
+                 <input type="text" name="book_wr_<?php echo $i ?>" value="<?php echo isset($co['book_wr_'.$i]) ? $co['book_wr_'.$i] :'';?>" id="book_wr_<?php echo $i ?>" class="frm_input extra-value-input">
             </td>
         </tr>
         <?php } ?>

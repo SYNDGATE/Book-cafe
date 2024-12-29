@@ -13,6 +13,13 @@ else
 check_admin_token();
 
 $sevs = "";
+
+$sst = isset($_POST['sst']) ? $_POST['sst'] : ''; 
+$sod = isset($_POST['sod']) ? $_POST['sod'] : ''; 
+$sfl = isset($_POST['sfl']) ? $_POST['sfl'] : ''; 
+$stx = isset($_POST['stx']) ? $_POST['stx'] : ''; 
+$page = isset($_POST['page']) ? $_POST['page'] : '';
+
 	if($sst)
 	   $sevs .= "&sst=".$_POST['sst'];
 	if($sod)

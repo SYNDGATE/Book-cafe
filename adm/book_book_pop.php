@@ -1,10 +1,9 @@
 <?php
 include_once('./_common.php');
-
-auth_check_menu($auth, $sub_menu, 'r');
+//auth_check_menu($auth, $sub_menu, 'r');
 
 $sql_common = " from g5_book_table ";
-
+$sql_search = "";
 if ($stx) {
 	$sql_search = " where (1) ";
 

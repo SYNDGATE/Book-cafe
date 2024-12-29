@@ -8,7 +8,7 @@ $sql_common = " from g5_book_table ";
 //xss 공격 방어
 $stx = preg_replace("#^select.*from.*[\s\(]+union[\s\)]+.*#i ", "select 1", $stx);
 $stx = preg_replace('#([^\p{L}]|^)(?:javascript|jar|applescript|vbscript|vbs|wscript|jscript|behavior|mocha|livescript|view-source)\s*:(?:.*?([/\\\;()\'">]|$))#ius','$1$2', $stx);
-
+$sql_search = "";
 if ($stx) {
 	$sql_search = " where (1) ";
 
